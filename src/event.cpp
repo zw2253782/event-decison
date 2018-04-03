@@ -14,6 +14,9 @@ using namespace std;
 EventObj fromJson(EventObj eventObj, string json);
 void start(string json);
 string CreateJson();
+void checkTurn(EventObj eventObj);
+void checkBrake(EventObj eventObj);
+void checkLaneChange(EventObj eventObj);
 
 int main() {
 
@@ -29,11 +32,23 @@ void start(string json){
 	EventObj eventObj;
 	eventObj = fromJson(eventObj,json);
 	cout<<eventObj.event<<endl;
-	cout<<eventObj.leftUp<<endl;
+	cout<<eventObj.upperleft_h<<endl;
 
+
+	/*Accel. / Deceleration
+Steering Angle
+Turning Radius
+Head Pose
+Turning Signal*/
     if (eventObj.event == "turn") {
     	cout<<"event turn"<<endl;
-        
+        double score = 100;
+        int direction = 0;//left = -1, straight = 0, right 1
+        checkTurn(eventObj);
+        if(eventObj.direction = 0){
+        	score = 0;
+        }
+
     } else if (eventObj.event == "hardbrake") {
     	cout<<"event hardbrake"<<endl;
 
@@ -49,7 +64,7 @@ void start(string json){
 
 string CreateJson() {
   Json::Value jsonData;
-  jsonData["leftUp"] = 1.2;
+  jsonData["leftUp"] = 18;
   jsonData["event"] = "turn";
 
   Json::FastWriter fastWriter;
@@ -66,11 +81,48 @@ EventObj fromJson(EventObj eventObj, string json) {
   cout<<"inside"<<json<<endl;
 
   //parse json data and read more data
-  eventObj.leftUp = parsedFromString["leftUp"].asDouble();
+  eventObj.upperleft_h = parsedFromString["leftUp"].asDouble();
   eventObj.event = parsedFromString["event"].asString();
   //eventObj.leftUp = parsedFromString["leftUp"].asDouble();
   //eventObj.leftUp = parsedFromString["leftUp"].asDouble();
-  cout<<"left"<<parsedFromString["leftUp"]<<eventObj.leftUp<<endl;
+  cout<<"left"<<parsedFromString["leftUp"]<<eventObj.upperleft_h<<endl;
 
   return eventObj;
 }
+
+void checkTurn(EventObj eventObj){
+
+	if (eventObj.box_num>0) {
+	}
+}
+
+void checkBrake(EventObj eventObj){
+
+}
+void checkLaneChange(EventObj eventObj){
+
+}
+
+
+/*
+ * Vehicle Speed
+Accel. / Deceleration
+Steering Angle
+Turning Radius
+Head Pose
+Turning Signal
+
+
+Excessive of Jerk
+Front Vehicle Distance
+Traffic Control Signal
+Pedestrian / Cyclist
+Head Pose
+Front Vehicle Distance
+Rear Vehicle Distance
+Turning Signal
+Maneuver Duration
+Head Pose
+ * */
+
+

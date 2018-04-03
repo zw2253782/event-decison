@@ -64,23 +64,54 @@ class EventObj {
 
 public:
 
-  string event{"111"};
-  bool isBoxing{false};
+  string event{""};
   bool isTrafficLight{false};
   bool isPedestrian_Cycle{false};
-  bool isHeadPose{false};
-  bool isBoxing{false};
+  bool isIntersection{false};
+  bool isTurningSignal{false};
 
-  double leftUp{0.0};
-  double leftdown{0.0};
-  double rightUp{0.0};
-  double rightDown{0.0};
+  uint64_t event_start{0};
+  uint64_t event_end{0};
+  int headpose{0};
+  int direction{0};//left = -1, straight = 0, right 1
 
-  int n{0};
-  int index{0}; // 0 ... n - 1
-  uint64_t parketeventStart{0};
-  uint64_t parketeventEnd{0};
-  string parketeventType{""};
+  double speed{0.0};
+  double accel{false};
+  double decel{false};
+  double longtitude{0.0};
+  double altitude{0.0};
+  double steeringAngle{0.0};
+
+  int box_num{0};
+  int class_name{0};
+  string class_id{""};
+
+  uint64_t timestamp{0};
+  int confidence{0};
+  int upperleft_h{0};
+  int upperleft_v{0};
+  int bottomright_h{0};
+  int bottomright_v{0};
+
+  /*
+   * Vehicle Speed
+  Accel. / Deceleration
+  Steering Angle
+  Turning Radius
+  Head Pose
+  Turning Signal
+
+  Excessive of Jerk
+  Front Vehicle Distance
+  Traffic Control Signal
+  Pedestrian / Cyclist
+  Head Pose
+  Front Vehicle Distance
+  Rear Vehicle Distance
+  Turning Signal
+  Maneuver Duration
+  Head Pose
+   * */
 };
 
 #endif
