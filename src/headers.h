@@ -65,6 +65,12 @@ class EventObj {
 public:
 
   string event{"111"};
+  bool isBoxing{false};
+  bool isTrafficLight{false};
+  bool isPedestrian_Cycle{false};
+  bool isHeadPose{false};
+  bool isBoxing{false};
+
   double leftUp{0.0};
   double leftdown{0.0};
   double rightUp{0.0};

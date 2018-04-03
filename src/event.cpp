@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : event.cpp
-// Author      : 
+// Author      : wei
 // Version     :
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
@@ -31,9 +31,9 @@ void start(string json){
 	cout<<eventObj.event<<endl;
 	cout<<eventObj.leftUp<<endl;
 
-
     if (eventObj.event == "turn") {
-
+    	cout<<"event turn"<<endl;
+        
     } else if (eventObj.event == "hardbrake") {
     	cout<<"event hardbrake"<<endl;
 
@@ -57,23 +57,6 @@ string CreateJson() {
   return output;
 }
 
-/*class EventObj {
-
-public:
-
-  string event{""};
-  double leftUp{0.0};
-  double leftdown{0.0};
-  double rightUp{0.0};
-  double rightDown{0.0};
-
-  int n{0};
-  int index{0}; // 0 ... n - 1
-  uint64_t parketeventStart{0};
-  uint64_t parketeventEnd{0};
-  string parketeventType{""};
-
-};*/
 
 EventObj fromJson(EventObj eventObj, string json) {
   Json::Value parsedFromString;
