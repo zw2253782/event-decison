@@ -14,14 +14,14 @@ using namespace std;
 EventObj fromJson(EventObj eventObj, string json);
 void start(string json);
 string CreateJson();
-void checkTurn(EventObj eventObj);
-void checkBrake(EventObj eventObj);
-void checkLaneChange(EventObj eventObj);
+void CheckTurn(EventObj eventObj);
+void CheckBrake(EventObj eventObj);
+void CheckLaneChange(EventObj eventObj);
 
 int main() {
 
 	string eventjson = CreateJson();
-	cout<<"great"<<eventjson<<endl;
+	cout<<"create"<<eventjson<<endl;
 	start(eventjson);
 	return 0;
 }
@@ -34,6 +34,8 @@ void start(string json){
 	cout<<eventObj.event<<endl;
 	cout<<eventObj.upperleft_h<<endl;
 
+        int limitedSpeed = 35;
+
 
 	/*Accel. / Deceleration
 Steering Angle
@@ -42,15 +44,29 @@ Head Pose
 Turning Signal*/
     if (eventObj.event == "turn") {
     	cout<<"event turn"<<endl;
-        double score = 100;
-        int direction = 0;//left = -1, straight = 0, right 1
-        checkTurn(eventObj);
-        if(eventObj.direction = 0){
-        	score = 0;
+        double score = 0;
+        //int direction = 0;//left = -1, straight = 0, right 1
+        CheckTurn(eventObj);
+        double turningRadius = 0;
+        if(eventObj.direction = 0 || eventObj.headpose == 0 || isTurningSignal == false){
+        	score -= 100;
+        } else if (eventObj.speed > limitedSpeed*1.1){
+                score -= 50;
+        } else if (eventObj.accel == true && eventObj.speed >15){
+                score -= 20;
+        } else if (eventObj.decel == true && eventObj.speed < 15){
+                score += 20;
+        } else{
         }
 
     } else if (eventObj.event == "hardbrake") {
     	cout<<"event hardbrake"<<endl;
+        double score = 0;
+        if(CheckBrake(eventObj)){
+               return "reasonable";
+        } else{
+               return "harmful";
+        }
 
     } else if (eventObj.event == "lanechange"){
     	cout<<"event lanechange"<<endl;
@@ -90,16 +106,26 @@ EventObj fromJson(EventObj eventObj, string json) {
   return eventObj;
 }
 
-void checkTurn(EventObj eventObj){
+void CheckTurn(EventObj eventObj){
 
 	if (eventObj.box_num>0) {
 	}
 }
 
-void checkBrake(EventObj eventObj){
 
+void savePreviousObj(EventObj eventObj){
+     EventObj preEventObj = eventObj;
 }
-void checkLaneChange(EventObj eventObj){
+
+
+void CheckBrake(EventObj eventObj){
+	if (eventObj.box_num>0) {//object in front 
+             //check what obj, check distance, check if it is moveing
+	} else{
+             return false;
+        }
+}
+void CheckLaneChange(EventObj eventObj){
 
 }
 
