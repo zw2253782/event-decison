@@ -119,8 +119,13 @@ void savePreviousObj(EventObj eventObj){
 
 
 void CheckBrake(EventObj eventObj){
-	if (eventObj.box_num>0) {//object in front 
+        int objSize = 0;
+        int carize = 111;
+	if (eventObj.box_num = 0) {//object in front 
              //check what obj, check distance, check if it is moveing
+            objSize = abs((eventObj.bottomright_h - eventObj.upperleft_h)*(eventObj.bottomright_v - eventObj.upperleft_v));
+        }else if (eventObj) {
+
 	} else{
              return false;
         }
@@ -134,7 +139,7 @@ void CheckLaneChange(EventObj eventObj){
  * Vehicle Speed
 Accel. / Deceleration
 Steering Angle
-Turning Radius
+Turning Radius //由转弯半径R与外轮转角之间的关系是 R=L/Sinθ。+a 可知，转弯半径仅与外轮转角θ。、轴距L、主销到外轮轮辙中心线距离a有关，所以根据车辆的参数应该能直接算出
 Head Pose
 Turning Signal
 
