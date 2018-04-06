@@ -59,6 +59,10 @@ static inline uint64_t currentTimeMillis() {
 	return chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count();
 }
 
+struct Point {
+    double x;
+    double y;
+};
 
 class EventObj {
 
@@ -72,15 +76,26 @@ public:
 
   uint64_t event_start{0};
   uint64_t event_end{0};
-  int headpose{0};
-  int direction{0};//left = -1, straight = 0, right 1
 
+  int headpose{0}; // 0 - no headpose; 1-4: left, right, top, rear
+  int turningSignal{0}; // left = -1, straight = 0, right 1
+  double turningRadius{0.0};
   double speed{0.0};
   double accel{false};
   double decel{false};
+  double steeringAngle{0.0};
+
+  bool excessiveOfJerk{false};
+  bool trafficControlSignal{false};
+  bool distraction{false};
+  double frontVehicleDistance{0.0};
+  bool hasPedestrianCyclist{false};
+  
+  double rearVehicleDistance{0.0};
+  double maneuverDuration{0.0};
+
   double longtitude{0.0};
   double altitude{0.0};
-  double steeringAngle{0.0};
 
   int box_num{0};
   int class_name{0};
